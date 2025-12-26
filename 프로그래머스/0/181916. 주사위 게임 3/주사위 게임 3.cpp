@@ -15,21 +15,21 @@ int twotwo(int a, int b){
 }
 
 int solution(int a, int b, int c, int d) {
-    if(a == b && b == c && c == d) return a*1111;
-    if(a == b && a == c && a != d) return three(a,d);
-    if(a == b && a != c && a == d) return three(a,c);
-    if(a != b && a == c && a == d) return three(a,b);
-    if(a != b && b == c && b == d) return three(b,a);
-    if(a == b && b != c && c == d) return twotwo(a,d);
-    if(a == c && b != c && b == d) return twotwo(a,d);
-    if(a == d && a != b && b == c) return twotwo(a,b);
-    if(a == b && b != c && b != d && c != d) return c*d;
-    if(a == c && c != b && c != d && b != d) return b*d;
-    if(a == d && d != b && d != c && b != c) return b*c;
-    if(b == c && c != a && c != d && a != d) return a*d;
-    if(b == d && d != a && d != c && a != c) return a*c;
-    if(c == d && d != a && d != b && a != b) return a*b;
     vector<int> ans = {a, b, c, d};
     sort(ans.begin(), ans.end());
-    return ans[0];
+    if(ans[0] == ans [3]){
+        return ans[0]*1111;
+    } else if(ans[0] == ans[2]){
+        return three(ans[0], ans[3]);
+    } else if(ans[1] == ans[3]){
+        return three(ans[3], ans[0]);
+    } else if(ans[0] == ans[1] && ans[2] == ans[3]){
+        return twotwo(ans[0], ans[2]);
+    } else if(ans[0] == ans[1]){
+        return ans[2]*ans[3];
+    } else if(ans[1] == ans[2]){
+        return ans[0]*ans[3];
+    } else if(ans[2] == ans[3]){
+        return ans[0]*ans[1];
+    }else return ans[0];
 }
