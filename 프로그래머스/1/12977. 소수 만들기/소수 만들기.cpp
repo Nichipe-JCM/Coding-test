@@ -11,12 +11,14 @@ int solution(vector<int> nums) {
                 int n = nums[i] + nums[j] + nums[k];
                 bool prime = true;
                 for(int l = 2; l * l <= n; l++){
-                    if (n % l == 0) prime = false;
+                    if (n % l == 0){
+                        prime = false;
+                        break;
+                    }
                 }
                 if(prime) answer++;
             }
         }
     }
-
     return answer;
 }
