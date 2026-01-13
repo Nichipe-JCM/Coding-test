@@ -9,13 +9,6 @@ int solution(vector<string> babbling) {
     vector<string> can = {"aya","ye","woo","ma"};
     for(string b : babbling){
         bool found = false;
-        if(b.length()<=3){
-            auto it = find (can.begin(), can.end(), b);
-            if(it != can.end()){
-                answer++;
-                continue;
-            } else continue;
-        }
         int pos = 0;
         string prev = "";
         while(pos<b.length()){
