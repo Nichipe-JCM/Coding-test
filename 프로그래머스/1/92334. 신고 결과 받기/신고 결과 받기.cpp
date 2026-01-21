@@ -34,3 +34,38 @@ vector<int> solution(vector<string> id_list, vector<string> report, int k) {
         
     return answer;
 }
+
+/*
+
+#include <string>
+#include <vector>
+#include <sstream>
+#include <map>
+#include <algorithm>
+#include <unordered_set>
+
+using namespace std;
+
+vector<int> solution(vector<string> id_list, vector<string> report, int k) {
+    vector<int> answer(id_list.size(),0);
+    map<string, int> repoCount;
+    map<string, unordered_set<string>> repoID;
+    
+    for(string s : report){
+        stringstream ss(s);
+        string reporter;
+        string reported;
+        ss >> reporter >> reported;
+        if(repoID[reporter].insert(reported).second == true) repoCount[reported]++;
+    }
+    
+    for(int i = 0; i < id_list.size(); i++){
+        for(string id : repoID[id_list[i]]){
+            if(repoCount[id] >= k) answer[i]++;
+        }
+    }
+        
+    return answer;
+}
+
+*/
