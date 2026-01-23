@@ -5,9 +5,9 @@ using namespace std;
 
 int solution(int n) {
     int answer = 0;
-    long long n0 = 0;
-    long long n1 = 1;
-    long long nn;
+    int n0 = 0;
+    int n1 = 1;
+    int nn;
     
     for(int i = 2;i <= n; i++){
         nn = (n1 + n0) % 1234567;
