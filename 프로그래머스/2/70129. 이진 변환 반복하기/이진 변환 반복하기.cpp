@@ -24,12 +24,7 @@ vector<int> solution(string s) {
             bin /= 2;
         }
         reverse(temp3.begin(), temp3.end());
-        for(int i = 0; i < temp3.length(); i++){
-            if (temp3[i] == '1'){
-                dec = temp3.substr(i);
-                break;
-            }
-        }
+        dec = temp3;
         tobincount++;
     }
     answer = {tobincount, zerodel};    
