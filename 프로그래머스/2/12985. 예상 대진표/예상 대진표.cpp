@@ -5,21 +5,10 @@ using namespace std;
 int solution(int n, int a, int b)
 {
     int answer = 0;
-    while(true){
+    while(a != b){
+        a = (a + 1) / 2;
+        b = (b + 1) / 2;
         answer++;
-        if ((a-b==1&&a%2==0)||(b-a==1&&b%2==0)){
-            break;
-        }
-        if (a%2 == 1){
-            a = a/2+1;
-        } else if (a!=1){
-            a /= 2;
-        }
-        if (b%2 == 1){
-            b = b/2+1;
-        } else if (b!=1) {
-            b /= 2;
-        }
     }
 
     return answer;
