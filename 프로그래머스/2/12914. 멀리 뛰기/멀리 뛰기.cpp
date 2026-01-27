@@ -6,6 +6,7 @@ using namespace std;
 long long solution(int n) {
     long long answer = 0;
     vector<long long> vec(n,0);
+    if(n == 1) return 1;
     vec[0] = 1;
     vec[1] = 2;
     for(int i = 2; i < n; i++){
