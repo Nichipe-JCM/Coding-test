@@ -3,18 +3,15 @@
 
 using namespace std;
 
-int max_count = 0;
-vector<bool> visited(8, false);
-
-void dfs(int k, int count, vector<vector<int>> dungeons) {
-    if (count > max_count) max_count = count;
+void dfs(int k, int count, const vector<vector<int>>& dungeons, vector<bool>& visited, int& answer) {
+    if (count > answer) answer = count;
     
     for(int i = 0; i < dungeons.size(); i++)
     {
         if (!visited[i] && k >= dungeons[i][0])
         {
             visited[i] = true;
-            dfs(k - dungeons[i][1], count + 1, dungeons);
+            dfs(k - dungeons[i][1], count + 1, dungeons, visited, answer);
             visited[i] = false;
         }
     }
@@ -22,7 +19,7 @@ void dfs(int k, int count, vector<vector<int>> dungeons) {
 
 int solution(int k, vector<vector<int>> dungeons) {
     int answer = 0;
-    dfs(k, 0, dungeons);
-    answer = max_count;
+    vector<bool> visited(dungeons.size(), false);
+    dfs(k, 0, dungeons, visited, answer);
     return answer;
 }
