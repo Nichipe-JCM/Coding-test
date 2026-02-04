@@ -7,7 +7,7 @@ using namespace std;
 
 bool isPrime(long long n)
 {
-    if (n == 1) return false;
+    if (n <= 1) return false;
     for (long long i = 2; i <= sqrt(n); i++)
     {
         if (n % i == 0)
@@ -36,10 +36,7 @@ int solution(int n, int k) {
     {
         if (c == '0')
         {
-            if (temp == "" || temp == "1"){
-                temp = "";
-                continue;
-            }
+            if (temp == "") continue;
             long long tempn = stoll(temp);
             if (isPrime(tempn)) answer++;
             temp = "";
