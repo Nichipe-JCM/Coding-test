@@ -1,16 +1,10 @@
 #include <string>
 #include <vector>
-#include <unordered_map>
 
 using namespace std;
-void recursion(int length, int y, int x, const vector<vector<int>>& arr, unordered_map<int, int>& countmap)
+void recursion(int length, int y, int x, const vector<vector<int>>& arr, vector<int>& answer)
 {
     int base = arr[y][x];
-    if (length == 1)
-    {
-        countmap[base]++;
-        return;
-    }
     bool iscompable = true;
     for (int i = y; i < y + length; i++)
     {
@@ -26,24 +20,22 @@ void recursion(int length, int y, int x, const vector<vector<int>>& arr, unorder
     }
     if (iscompable)
     {
-        countmap[base]++;
+        answer[base]++;
         return;
     }
     else
     {
         int half = length / 2;
-        recursion(half, y, x, arr, countmap);
-        recursion(half, y + half, x, arr, countmap);
-        recursion(half, y, x + half, arr, countmap);
-        recursion(half, y + half, x + half, arr, countmap);
+        recursion(half, y, x, arr, answer);
+        recursion(half, y + half, x, arr, answer);
+        recursion(half, y, x + half, arr, answer);
+        recursion(half, y + half, x + half, arr, answer);
     }
 }
 
 vector<int> solution(vector<vector<int>> arr) {
-    vector<int> answer;
+    vector<int> answer(2, 0);
     int length = arr.size();
-    unordered_map<int, int> countmap;
-    recursion(length, 0, 0, arr, countmap);
-    answer = {countmap[0], countmap[1]};
+    recursion(length, 0, 0, arr, answer);
     return answer;
 }
