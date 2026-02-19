@@ -5,29 +5,29 @@
 
 using namespace std;
 
-int BFS(int column, int row, vector<vector<bool>>& isvisited, vector<string>& maps)
+int BFS(int row, int column, vector<vector<bool>>& isvisited, vector<string>& maps)
 {
     int sum = 0;
     queue<pair<int, int>> search;
-    search.push({column, row});
-    sum += maps[column][row] - '0';
-    isvisited[column][row] = true;
-    vector<int> dcol = {-1, 1, 0, 0};
-    vector<int> drow = {0, 0, -1, 1};
+    search.push({row, column});
+    sum += maps[row][column] - '0';
+    isvisited[row][column] = true;
+    vector<int> drow = {-1, 1, 0, 0};
+    vector<int> dcol = {0, 0, -1, 1};
     
     while (!search.empty())
     {
-        int curcol = search.front().first;
-        int currow = search.front().second;
+        int currow = search.front().first;
+        int curcol = search.front().second;
         for(int i = 0; i < 4; i++)
         {
             int newcol = curcol + dcol[i];
             int newrow = currow + drow[i];
-            if (newcol < 0 || newcol >= maps.size() || newrow < 0 || newrow >= maps[0].length()) continue; 
-            if (isvisited[newcol][newrow] || maps[newcol][newrow] == 'X') continue;
-            isvisited[newcol][newrow] = true;
-            sum += maps[newcol][newrow] - '0';
-            search.push({newcol, newrow});
+            if (newrow < 0 || newrow >= maps.size() || newcol < 0 || newcol >= maps[0].length()) continue; 
+            if (isvisited[newrow][newcol] || maps[newrow][newcol] == 'X') continue;
+            isvisited[newrow][newcol] = true;
+            sum += maps[newrow][newcol] - '0';
+            search.push({newrow, newcol});
         }
         search.pop();
     }
@@ -37,13 +37,13 @@ int BFS(int column, int row, vector<vector<bool>>& isvisited, vector<string>& ma
 
 vector<int> solution(vector<string> maps) {
     vector<int> answer;
-    int column = maps.size();
-    int row = maps[0].length();    
-    vector<vector<bool>> isvisited(column, vector<bool>(row, false));
+    int row = maps.size();
+    int column = maps[0].length();    
+    vector<vector<bool>> isvisited(row, vector<bool>(column, false));
     
-    for(int i = 0; i < column; i++)
+    for(int i = 0; i < row; i++)
     {
-        for(int j = 0; j < row; j++)
+        for(int j = 0; j < column; j++)
         {
             if (maps[i][j] != 'X' && !isvisited[i][j]) answer.push_back(BFS(i, j, isvisited, maps));
         }
