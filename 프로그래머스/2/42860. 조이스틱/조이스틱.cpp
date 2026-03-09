@@ -19,18 +19,10 @@ int solution(string name) {
     {
         answer += alphabet(name[i]);
         int nexti = i + 1;
-        if (nexti < length)
-        {
-            while (nexti < length && name[nexti] == 'A')
-            {
-                nexti++;
-            }
-        }
-        
+        while (nexti < length && name[nexti] == 'A') nexti++;
         int route2 = i + i + length - nexti;
         int route3 = (length - nexti) * 2 + i;
-        int temp = min(route2, route3);
-        route1 = min(route1, temp);
+        route1 = min({route1, route2, route3});
     }
     answer += route1;
     return answer;
