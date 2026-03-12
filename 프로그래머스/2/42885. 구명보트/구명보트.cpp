@@ -8,7 +8,7 @@ int solution(vector<int> people, int limit) {
     int answer = 0;
     int left = 0, right = people.size() - 1;
     sort(people.begin(), people.end());
-    while(left < right)
+    while(left <= right)
     {
         if (people[left] + people[right] <= limit)
         {
@@ -22,6 +22,5 @@ int solution(vector<int> people, int limit) {
             answer++;
         }
     }
-    if (left == right) answer++;
     return answer;
 }
