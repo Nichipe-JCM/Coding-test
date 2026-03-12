@@ -15,6 +15,7 @@ int solution(int n, vector<vector<int>> computers) {
         {
             answer++;
             q.push(i);
+            isvisited[i] = true;
             while(!q.empty())
             {
                 int current = q.front();
