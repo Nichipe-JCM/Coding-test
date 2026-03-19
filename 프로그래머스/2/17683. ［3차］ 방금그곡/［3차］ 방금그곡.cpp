@@ -29,6 +29,7 @@ string solution(string m, vector<string> musicinfos) {
     string answer = "(None)";
     string tofind = convertnotes(m);
     vector<musicrecord> musics;
+    
     for(const string& s : musicinfos)
     {
         string starttime = "", endtime = "", name = "", notes = "";
@@ -55,15 +56,18 @@ string solution(string m, vector<string> musicinfos) {
                 }
             }
         }
+        
         int startint = (stoi(starttime) / 100 * 60) + (stoi(starttime) % 100);
         int endint = (stoi(endtime) / 100 * 60) + (stoi(endtime) % 100);
         int totalduration = endint - startint;
+        
         string convertednotes = convertnotes(notes);
         string totalnotes = "";
         for(int i = 0; i < totalduration; i++)
         {
             totalnotes += convertednotes[i % convertednotes.length()];
         }
+        
         musicrecord newmusic;
         newmusic.duration = totalduration;
         newmusic.songname = name;
@@ -83,5 +87,6 @@ string solution(string m, vector<string> musicinfos) {
             }
         }
     }
+    
     return answer;
 }
