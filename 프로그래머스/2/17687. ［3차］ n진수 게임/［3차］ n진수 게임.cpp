@@ -23,7 +23,7 @@ string solution(int n, int t, int m, int p) {
     string answer = "";
     string fullnumbers = "";
     int totalnumbercount = t * m;
-    for(int i = 0; i < totalnumbercount; i++)
+    for(int i = 0; fullnumbers.size() < totalnumbercount; i++)
     {
         fullnumbers += tobase(i, n);
     }
