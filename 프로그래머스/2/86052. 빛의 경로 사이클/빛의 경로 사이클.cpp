@@ -1,57 +1,54 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
 vector<int> dx = {0, 1, 0, -1};
 vector<int> dy = {-1, 0, 1, 0};
 
-void recordpath(const vector<string>& grid,
-         vector<vector<vector<bool>>>& isvisited,
-         vector<int>& answer,
-         int length, int currentway, int currentrow, int currentcolumn, 
-         int& rowlength, int& columnlength){
-    
-    if (isvisited[currentrow][currentcolumn][currentway])
-    {
-        answer.push_back(length);
-        return;
-    }
-    isvisited[currentrow][currentcolumn][currentway] = true;
-    
-    int nextway;
-    switch(grid[currentrow][currentcolumn]){
-        case 'S':
-            nextway = currentway;
-            break;
-        case 'L':
-            nextway = (currentway - 1 + 4) % 4;
-            break;
-        case 'R':
-            nextway = (currentway + 1) % 4;
-            break;
-    };
-    
-    int nextrow = (currentrow + dy[nextway] + rowlength) % rowlength;
-    int nextcol = (currentcolumn + dx[nextway] + columnlength) % columnlength;
-    
-    recordpath(grid, isvisited, answer, length + 1, nextway, nextrow, nextcol, rowlength, columnlength);
-}
-
 vector<int> solution(vector<string> grid) {
     vector<int> answer;
     int row = grid.size();
     int column = grid[0].length();
     vector<vector<vector<bool>>> isvisited(row, vector<vector<bool>>(column, vector<bool>(4)));
-    for(int i = 0; i < row; i++)
+    for(int r = 0; r < row; r++)
     {
-        for(int j = 0; j < column; j++)
+        for(int c = 0; c < column; c++)
         {
-            for(int k = 0; k < 4; k++)
+            for(int w = 0; w < 4; w++)
             {
-                if (isvisited[i][j][k]) continue;
-                recordpath(grid, isvisited, answer, 0, k, i, j, row, column);
+                if (isvisited[r][c][w]) continue;
+                int length = 0;
+                int currentrow = r;
+                int currentcol = c;
+                int currentway = w;
+                while(true)
+                {
+                    if (isvisited[currentrow][currentcol][currentway])
+                    {
+                        answer.push_back(length);
+                        break;
+                    }
+                    isvisited[currentrow][currentcol][currentway] = true;
+                    
+                    switch(grid[currentrow][currentcol]){
+                        case 'S':
+                            currentway = currentway;
+                            break;
+                        case 'L':
+                            currentway = (currentway - 1 + 4) % 4;
+                            break;
+                        case 'R':
+                            currentway = (currentway + 1) % 4;
+                            break;
+                    };
+    
+                    currentrow = (currentrow + dy[currentway] + row) % row;
+                    currentcol = (currentcol + dx[currentway] + column) % column;
+                    length++;
+                }
             }
         }
     }
