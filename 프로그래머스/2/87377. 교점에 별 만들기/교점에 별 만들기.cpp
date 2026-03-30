@@ -27,6 +27,7 @@ vector<string> solution(vector<vector<int>> line) {
             else dot.push_back(dotfromlines);
         }
     }
+    
     long long xmin = dot[0][0], xmax = dot[0][0], ymin = dot[0][1], ymax = dot[0][1];
     for(const vector<long long>& vec : dot)
     {
@@ -35,11 +36,10 @@ vector<string> solution(vector<vector<int>> line) {
         if (vec[1] < ymin) ymin = vec[1];
         else if (vec[1] > ymax) ymax = vec[1];
     }
-    if (xmin == xmax && ymin == ymax) return {"*"};
+    
     long long width = xmax - xmin + 1;
     long long height = ymax - ymin + 1;
-    string initdot = "";
-    for(long long i = 0; i < width; i++) initdot += '.';
+    string initdot(width, '.');
     vector<string> answer(height, initdot);
     for(const vector<long long>& vec : dot)
     {
@@ -47,5 +47,6 @@ vector<string> solution(vector<vector<int>> line) {
         long long relativey = ymax - vec[1];
         answer[relativey][relativex] = '*';
     }
+    
     return answer;
 }
