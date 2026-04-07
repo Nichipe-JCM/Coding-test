@@ -16,10 +16,7 @@ int main(){
         namemap[s[0]]++;
     }
     string over5list = "";
-    for(const auto& pair : namemap)
-    {
-        if (pair.second >= 5) over5list += pair.first;
-    }
+    for(const auto& pair : namemap) if (pair.second >= 5) over5list += pair.first;
     if (over5list == "") cout << "PREDAJA";
     else cout << over5list;
 }
