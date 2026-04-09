@@ -15,8 +15,9 @@ void DFS(int n, const vector<int>& info, vector<int> currentscore, int depth){
         
         for(int i = 0; i < 11; i++)
         {
+            if (currentscore[i] == 0 && info[i] == 0) continue;
             if (currentscore[i] > info[i]) lionscore += 10 - i;
-            else if (currentscore[i] <= info[i] && info[i] > 0) apeachscore += 10 - i;
+            else apeachscore += 10 - i;
         }
         
         int diff = lionscore - apeachscore;
