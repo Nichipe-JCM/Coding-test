@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <iostream>
 #include <algorithm>
 
 using namespace std;
@@ -9,6 +10,7 @@ long long solution(int n, vector<int> times) {
     auto minmax = minmax_element(times.begin(), times.end());
     long long mintime = *minmax.first;
     long long maxtime = (long long)*minmax.second * n;
+    cout << maxtime;
     while(mintime <= maxtime)
     {
         long long median = (mintime + maxtime) / 2;
