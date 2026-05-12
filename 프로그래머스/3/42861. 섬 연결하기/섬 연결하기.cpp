@@ -19,8 +19,8 @@ void setunion(int a, int b, vector<int>& parent){
 
 int solution(int n, vector<vector<int>> costs) {
     int answer = 0;
-    vector<int> parent(100, 0);
-    for(int i = 0; i < 100; i++) parent[i] = i;
+    vector<int> parent(n, 0);
+    for(int i = 0; i < n; i++) parent[i] = i;
     
     sort(costs.begin(), costs.end(), [](const vector<int>& a, const vector<int>& b){
         return a[2] < b[2];
